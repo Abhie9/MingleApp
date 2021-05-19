@@ -3,14 +3,13 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../_models/user';
-import { EMPTY } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
   baseUrl = 'https://localhost:5001/api/';
-  private currentUserSource: ReplaySubject<User> | undefined = new ReplaySubject<User>(1);
+  private currentUserSource: ReplaySubject<User> = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource?.asObservable();
 
   constructor(private http: HttpClient) { }
@@ -43,6 +42,7 @@ export class AccountService {
 
   logout(){
     localStorage.removeItem('user');
-    this.currentUserSource?.next(undefined);
+    localStorage.clear();
+    this.currentUserSource.next(undefined);
   }
 }

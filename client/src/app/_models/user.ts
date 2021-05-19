@@ -1,4 +1,4 @@
 export interface User {
-    username?: string;
-    token?: string;
+    username: string | null;
+    token: string | null;
 }
