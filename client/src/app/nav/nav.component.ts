@@ -12,7 +12,7 @@ import { AccountService } from '../_services/account.service';
 })
 export class NavComponent implements OnInit {
   model: any = {}
-  currentUser$!: Observable<User> | undefined;
+  currentUser$: Observable<User>;
  
   constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
 

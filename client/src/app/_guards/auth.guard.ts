@@ -9,16 +9,15 @@ import { AccountService } from '../_services/account.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+
   constructor(private accountService: AccountService, private toastr: ToastrService) {}
 
-  canActivate(): Observable<boolean | UrlTree> {
-    return this.accountService.currentUser$.pipe(
-      map(user => {
-        console.log(user)
-        if (user) return true;
-        this.toastr.error('Nope!!')
-        return (false);
-      })
-    )
-  }
+    canActivate(): Observable<boolean> {
+      return this.accountService.currentUser$.pipe(
+        map(user => {
+          if (user) return true;
+          this.toastr.error('Nope!')
+        })
+      )
+    }
 }
