@@ -13,7 +13,8 @@ export class BusyService {
     this.busyRequestCount++;
     this.spinnerService.show(undefined, {
       size: 'large',
-      type: 'square-jelly-box',
+      type: 'pacman',
+      // type: 'square-jelly-box',
       bdColor: 'rgba(255,255,255,0)',
       color: "#64d6e2"
     });
