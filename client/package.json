@@ -25,12 +25,13 @@
     "bootstrap": "4.1.1",
     "bootswatch": "^5.0.1",
     "font-awesome": "^4.7.0",
+    "ng2-file-upload": "^1.4.0",
     "ngx-bootstrap": "^6.1.0",
+    "ngx-spinner": "^10.0.1",
     "ngx-toastr": "^13.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.3",
-    "ngx-spinner": "^10.0.1"
+    "zone.js": "~0.11.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1001.0",
