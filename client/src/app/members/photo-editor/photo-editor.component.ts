@@ -38,8 +38,8 @@ export class PhotoEditorComponent implements OnInit {
       this.accountService.setCurrentUser(this.user);
       this.member.photoUrl = photo.url;
       this.member.photos.forEach(p => {
-        if(p.isMAin) p.isMAin = false;
-        if(p.id === photo.id) p.isMAin = true;
+        if(p.isMain) p.isMain = false;
+        if(p.id === photo.id) p.isMain = true;
       })
     })
   }
@@ -67,8 +67,13 @@ export class PhotoEditorComponent implements OnInit {
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if(response){
-        const photo = JSON.parse(response);
+        const photo: Photo = JSON.parse(response);
         this.member.photos.push(photo);
+        if(photo.isMain){
+          this.user.photoUrl = photo.url;
+          this.member.photoUrl = photo.url;
+          this.accountService.setCurrentUser(this.user);
+        }
       }
     }
   }
