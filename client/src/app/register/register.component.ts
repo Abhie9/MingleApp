@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -16,7 +15,7 @@ export class RegisterComponent implements OnInit {
   validationErrors: string[] = []; 
 
   constructor(private accountService: AccountService, 
-    private toastr: ToastrService, private fb: FormBuilder, private router: Router) { }
+     private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.initializeForm();
