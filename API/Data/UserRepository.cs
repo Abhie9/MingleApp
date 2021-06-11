@@ -41,14 +41,15 @@ namespace API.Data
 
             query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
 
-            query = userParams.OrderBy switch{
-                "created" =>query.OrderByDescending(u => u.Created),
-                _ =>query.OrderByDescending(u => u.LastActive)
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
             };
-
-            return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(_mapper.
-                ConfigurationProvider).AsNoTracking(),
-                userParams.PageNumber, userParams.PageSize);
+            
+            return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(_mapper
+                .ConfigurationProvider).AsNoTracking(), 
+                    userParams.PageNumber, userParams.PageSize);
 
         }
 
@@ -72,12 +73,6 @@ namespace API.Data
             .SingleOrDefaultAsync(x => x.UserName == username);
 
         }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
-
         public void Update(AppUser user)
         {
             _context.Entry(user).State = EntityState.Modified;
