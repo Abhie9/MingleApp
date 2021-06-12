@@ -57,23 +57,25 @@ namespace API.Controllers
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
-        var user = await _userManager.Users.Include(p => p.Photos).SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
+        var user = await _userManager.Users
+                .Include(p => p.Photos)
+                .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
 
-        if (user == null) return Unauthorized("Invalid Credentials!");
+            if (user == null) return Unauthorized("Invalid username");
 
-        var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+            var result = await _signInManager
+                .CheckPasswordSignInAsync(user, loginDto.Password, false);
 
-        if(!result.Succeeded) return Unauthorized();
+            if (!result.Succeeded) return Unauthorized();
 
-        return new UserDto
-        {
-            Username = user.UserName,
-            Token = await _tokenService.CreateToken(user),
-            PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
-            knownAs = user.KnownAs,
-            Gender = user.Gender
-
-        };
+            return new UserDto
+            {
+                Username = user.UserName,
+                Token = await _tokenService.CreateToken(user),
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+                knownAs = user.KnownAs,
+                Gender = user.Gender
+            };
     }
 
 
