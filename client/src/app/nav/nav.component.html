@@ -20,9 +20,7 @@
               <a class="nav-link" routerLink='/admin' routerLinkActive='active' >Admin</a>
             </li>
           </ng-container>
-          <li class="nav-item">
-              <a class="nav-link" routerLink='/errors' routerLinkActive='active' >Errors</a>
-            </li>
+          
         </ul>
           <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
             <img src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.username}}">
